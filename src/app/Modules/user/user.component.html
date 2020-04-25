@@ -1,1 +1,13 @@
 <p>user works!</p>
+
+<button (click)="save()">Criar</button>
+
+<div class="user-list" *ngIf="users;else templateLoadingUsers">
+  <div class="user-list__item" *ngFor="let user of users | async">
+    {{ user.name }}
+  </div>
+</div>
+
+<ng-template #templateLoadingUsers>
+  Carregando usuários...
+</ng-template>
