@@ -6,16 +6,6 @@ import { HttpService } from './services/HttpService/http.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'angular-crud-test';
-
-  constructor(
-    private httpService: HttpService
-  ) {
-
-  }
-
-  ngOnInit() {
-    this.httpService.get('users').subscribe(r => console.log('r>>>>', r));
-  }
 }
