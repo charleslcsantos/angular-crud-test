@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  public users: Observable<IUser[]> = null;
+  public users: IUser[] = null;
   public user: IUser;
 
   constructor(
@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
   }
 
   getUsers() {
-    this.users = this.userService.getAll();
+    this.userService.getAll().subscribe(users => this.users = users);
   }
 
   async save(user?: IUser) {
@@ -29,7 +29,16 @@ export class UserComponent implements OnInit {
     }
 
     await this.userService.save(user).toPromise();
-    this.getUsers();
+
+    this.users.push(user);
+  }
+
+  remove(user: IUser, index: number) {
+    this.userService.remove(user);
+
+    if (index) {
+      this.users.splice(index, 1);
+    }
   }
 
 }

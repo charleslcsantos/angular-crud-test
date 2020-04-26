@@ -3,7 +3,7 @@
 <button (click)="save()">Criar</button>
 
 <div class="user-list" *ngIf="users;else templateLoadingUsers">
-  <div class="user-list__item" *ngFor="let user of users | async">
+  <div class="user-list__item" *ngFor="let user of users">
     {{ user.name }}
   </div>
 </div>
