@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, IUser } from './user.service';
-import { Observable } from 'rxjs';
+import { UserService, IUser, EnumUserGender } from './user.service';
 
 @Component({
   selector: 'app-user',
@@ -15,6 +14,7 @@ export class UserComponent implements OnInit {
     name: '',
     phone: '',
     username: '',
+    gender: EnumUserGender.men
   };
 
   constructor(
