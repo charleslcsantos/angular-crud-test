@@ -23,7 +23,7 @@ export class UserService {
     return this.httpService.get(this.endpoint);
   }
 
-  save(user: IUser) {
+  save(user: IUser): Observable<IUser> {
     if (user.id) {
       return this.httpService.put(`${this.endpoint}/${user.id}`, user);
     } else {
@@ -31,7 +31,7 @@ export class UserService {
     }
   }
 
-  remove(user) {
-    this.httpService.delete(`${this.endpoint}/${user.id}`);
+  remove(user): Observable<null> {
+    return this.httpService.delete(`${this.endpoint}/${user.id}`);
   }
 }

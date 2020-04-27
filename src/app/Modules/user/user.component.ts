@@ -9,7 +9,13 @@ import { Observable } from 'rxjs';
 })
 export class UserComponent implements OnInit {
   public users: IUser[] = null;
-  public user: IUser;
+  public user: IUser = {
+    avatar: '',
+    email: '',
+    name: '',
+    phone: '',
+    username: '',
+  };
 
   constructor(
     private userService: UserService
@@ -28,13 +34,13 @@ export class UserComponent implements OnInit {
       user = this.user;
     }
 
-    await this.userService.save(user).toPromise();
+    this.user = await this.userService.save(user).toPromise();
 
     this.users.push(user);
   }
 
   remove(user: IUser, index: number) {
-    this.userService.remove(user);
+    this.userService.remove(user).subscribe();
 
     if (index) {
       this.users.splice(index, 1);

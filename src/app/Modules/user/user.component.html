@@ -1,10 +1,22 @@
 <p>user works!</p>
 
-<button (click)="save()">Criar</button>
+
+<form class="user-form"
+  #formUser="ngForm"
+  (ngSubmit)="save()">
+    <input type="text" [(ngModel)]="user.name" name="Nome" placeholder="Nome" required>
+    <input type="text" [(ngModel)]="user.email" name="Email" placeholder="Email">
+    <input type="text" [(ngModel)]="user.phone" name="Telefone" placeholder="Telefone">
+    <input type="text" [(ngModel)]="user.username" name="Username" placeholder="Username">
+    <button type="submit" [disabled]="!formUser.valid">
+      Save
+    </button>
+</form>
 
 <div class="user-list" *ngIf="users;else templateLoadingUsers">
-  <div class="user-list__item" *ngFor="let user of users">
+  <div class="user-list__item" *ngFor="let user of users;let index = index">
     {{ user.name }}
+    <button (click)="remove(user, index)">Excluir</button>
   </div>
 </div>
 
