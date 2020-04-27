@@ -5,8 +5,7 @@
 }
 
 .user-card {
-  background: #f4f5f7;
-  border: 1px solid #ebeef3;
+  background: #222023;
   border-radius: 10px;
   padding: 1rem 2rem;
   display: grid;
@@ -16,7 +15,7 @@
   cursor: pointer;
   transition: all ease 0.2s;
   &:hover {
-    background: #e8eaec;
+    background: #201f21;
   }
   &__pic {
     img {
@@ -37,8 +36,9 @@
   grid-gap: 0.3rem;
   padding: 1rem 1.5rem;
   font-size: 0.8rem;
-  color: #7b7b7b;
-  background: #f8fbff;
+  color: #888888;
+  background: #39373c;
+  border-radius: 0 0 10px 10px;
   .list__actions {
     display: flex;
     align-items: center;
