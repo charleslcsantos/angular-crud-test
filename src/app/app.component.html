@@ -1,4 +1,19 @@
-<h1>I-Systems Angular test</h1>
+<div class="container">
+  <h1>I-Systems Angular Test</h1>
 
-<a [routerLink]="['/users']" routerLinkActive="router-link-active" >Usuários</a>
-<router-outlet></router-outlet>
+  <p>
+    Nesse teste você poderá visualizar, cadastrar, editar e remover usuários
+  </p>
+  <div>
+    <p>
+      Clique no link abaixo para carregar o módulo de usuários.
+    </p>
+    <a
+      [routerLink]="['/users']"
+      (click)="openUserModule()"
+      routerLinkActive="link-active"
+      >Usuários</a
+    >
+  </div>
+  <router-outlet></router-outlet>
+</div>

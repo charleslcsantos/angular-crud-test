@@ -1,0 +1,47 @@
+.wrapper {
+  max-width: 750px;
+  width: 100vw;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.user-card {
+  background: #f4f5f7;
+  border: 1px solid #ebeef3;
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  display: grid;
+  grid-template-columns: 0.2fr 1fr 0.2fr;
+  align-items: center;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: all ease 0.2s;
+  &:hover {
+    background: #e8eaec;
+  }
+  &__pic {
+    img {
+      width: 60px;
+      height: 100%;
+      max-height: 60px;
+      object-fit: contain;
+      border-radius: 50px;
+      border: 2px solid #d6d6d6;
+    }
+  }
+}
+
+.user-detail {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 0.3fr 1fr 2fr repeat(3, 1fr);
+  grid-gap: 0.3rem;
+  padding: 1rem 1.5rem;
+  font-size: 0.8rem;
+  color: #7b7b7b;
+  background: #f8fbff;
+  .list__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

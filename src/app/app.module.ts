@@ -1,31 +1,24 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Provider } from '@angular/core';
-import {
-  HttpClientModule, HTTP_INTERCEPTORS,
-} from '@angular/common/http';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule, Provider } from "@angular/core";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HttpRequestInterceptor } from './http-interceptor/http-request.service';
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { HttpRequestInterceptor } from "./http-interceptor/http-request.service";
+import { IconEditComponent } from "./shared/icons/icon-edit/icon-edit.component";
 
 const providers: Provider[] = [
   {
     provide: HTTP_INTERCEPTORS,
     useClass: HttpRequestInterceptor,
-    multi: true
-  }
+    multi: true,
+  },
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule],
   providers: providers,
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

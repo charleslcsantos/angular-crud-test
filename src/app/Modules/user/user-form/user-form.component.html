@@ -1,0 +1,34 @@
+<form class="user-form" #formUser="ngForm" (ngSubmit)="save()">
+  <input
+    type="text"
+    [(ngModel)]="user.name"
+    name="Nome"
+    placeholder="Nome"
+    required
+  />
+  <input
+    type="text"
+    [(ngModel)]="user.email"
+    name="Email"
+    placeholder="Email"
+  />
+  <input
+    type="text"
+    [(ngModel)]="user.phone"
+    name="Telefone"
+    placeholder="Telefone"
+  />
+  <input
+    type="text"
+    [(ngModel)]="user.username"
+    name="Username"
+    placeholder="Username"
+  />
+  <select name="gender" [(ngModel)]="user.gender">
+    <option value="men" selected>Masculino</option>
+    <option value="woman">Feminino</option>
+  </select>
+  <button type="submit" [disabled]="!formUser.valid">
+    Save
+  </button>
+</form>
