@@ -1,6 +1,7 @@
-<h2>Usuários</h2>
-
-<app-user-form (onClickSave)="save(user)" [user]="user"></app-user-form>
+<div class="new-user">
+  <h2>Criar novos usuários</h2>
+  <app-user-form (onClickSave)="save(user)" [user]="user"></app-user-form>
+</div>
 
 <div class="list user-list" *ngIf="users; else templateLoadingUsers">
   <app-user-card

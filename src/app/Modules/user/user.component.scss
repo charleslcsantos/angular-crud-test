@@ -1,3 +1,17 @@
+.new-user {
+  margin: 0 auto 1rem;
+  background: #161517;
+  padding: 1.5rem 1.5rem 2rem;
+  border-radius: 10px;
+  h2 {
+    color: #757575;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.04rem;
+  }
+}
+
 .user {
   &-list {
     &__item,
