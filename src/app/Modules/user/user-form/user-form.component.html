@@ -34,7 +34,7 @@
     name="gender"
     [(ngModel)]="user.gender"
   >
-    <option value="men" selected>Masculino</option>
+    <option value="men">Masculino</option>
     <option value="woman">Feminino</option>
   </select>
   <button
@@ -45,6 +45,7 @@
     Salvar
   </button>
   <input
+    *ngIf="user.id"
     (click)="cancel()"
     value="Cancelar"
     class="btn btn-sm btn-outline-secondary"
