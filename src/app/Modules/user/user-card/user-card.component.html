@@ -4,18 +4,27 @@
       <img src="{{ user.avatar }}" alt="user avatar" />
     </div>
     <div class="user-card__title">{{ user.name }}</div>
-    <icon-arrow></icon-arrow>
+    <icon-arrow class="btn"></icon-arrow>
   </div>
 
   <div class="user-detail" *ngIf="canShowDetail">
-    <div class="user-info">{{ user.id }}</div>
-    <div class="user-info">{{ user.name }}</div>
-    <div class="user-info">{{ user.email }}</div>
-    <div class="user-info">{{ user.username }}</div>
-    <div class="user-info">{{ user.phone }}</div>
-    <div class="list__actions">
-      <icon-edit (click)="edit(user, index)" class="mr-2"></icon-edit>
-      <icon-remove (click)="remove(user, index)"></icon-remove>
+    <div class="read-only" *ngIf="!canEditUser; else userFormTemplate">
+      <div class="user-info">{{ user.id }}</div>
+      <div class="user-info">{{ user.name }}</div>
+      <div class="user-info">{{ user.email }}</div>
+      <div class="user-info">{{ user.username }}</div>
+      <div class="user-info">{{ user.phone }}</div>
+      <div class="list__actions">
+        <icon-edit (click)="edit(user)" class="mr-2"></icon-edit>
+        <icon-remove (click)="remove(user)"></icon-remove>
+      </div>
     </div>
+    <ng-template #userFormTemplate>
+      <app-user-form
+        [user]="user"
+        (onClickSave)="edit(user)"
+        (onClickCancel)="edit()"
+      ></app-user-form>
+    </ng-template>
   </div>
 </div>

@@ -1,6 +1,7 @@
 <form class="user-form" #formUser="ngForm" (ngSubmit)="save()">
   <input
     type="text"
+    class="form-control form-control-sm"
     [(ngModel)]="user.name"
     name="Nome"
     placeholder="Nome"
@@ -8,27 +9,46 @@
   />
   <input
     type="text"
+    class="form-control form-control-sm"
     [(ngModel)]="user.email"
     name="Email"
     placeholder="Email"
   />
   <input
     type="text"
+    class="form-control form-control-sm"
     [(ngModel)]="user.phone"
     name="Telefone"
     placeholder="Telefone"
   />
   <input
     type="text"
+    class="form-control form-control-sm"
     [(ngModel)]="user.username"
     name="Username"
     placeholder="Username"
   />
-  <select name="gender" [(ngModel)]="user.gender">
+  <select
+    *ngIf="!user.id"
+    class="form-control form-control-sm"
+    name="gender"
+    [(ngModel)]="user.gender"
+  >
     <option value="men" selected>Masculino</option>
     <option value="woman">Feminino</option>
   </select>
-  <button type="submit" [disabled]="!formUser.valid">
-    Save
+  <button
+    class="btn btn-sm btn-outline-success"
+    type="submit"
+    [disabled]="!formUser.valid"
+  >
+    Salvar
   </button>
+  <input
+    (click)="cancel()"
+    value="Cancelar"
+    class="btn btn-sm btn-outline-secondary"
+    type="button"
+    [disabled]="!formUser.valid"
+  />
 </form>

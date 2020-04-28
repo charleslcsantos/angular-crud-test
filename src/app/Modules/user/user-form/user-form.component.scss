@@ -1,0 +1,17 @@
+.user-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0.7fr 1fr repeat(2, 0.4fr);
+  grid-gap: 15px;
+  grid-auto-flow: column;
+}
+
+.form-control-sm {
+  font-size: 0.8rem;
+}
+
+.btn-sm {
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+}

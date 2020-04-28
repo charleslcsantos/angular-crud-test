@@ -1,15 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
+import { IUser, EnumUserGender, UserService } from "../user.service";
 
 @Component({
-  selector: 'app-user-form',
-  templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+  selector: "app-user-form",
+  templateUrl: "./user-form.component.html",
+  styleUrls: ["./user-form.component.scss"],
 })
 export class UserFormComponent implements OnInit {
+  @Output() onClickCancel?: EventEmitter<boolean> = new EventEmitter();
+  @Output() onClickSave?: EventEmitter<boolean> = new EventEmitter();
 
-  constructor() { }
+  @Input() user: IUser = {
+    avatar: "",
+    email: "",
+    name: "",
+    phone: "",
+    username: "",
+    gender: EnumUserGender.men,
+  };
 
-  ngOnInit() {
+  constructor(private userService: UserService) {}
+
+  ngOnInit() {}
+
+  cancel() {
+    if (this.onClickCancel) {
+      this.onClickCancel.emit();
+    }
   }
 
+  async save(user?: IUser) {
+    if (!user) {
+      user = this.user;
+    }
+
+    this.user = await this.userService.save(user).toPromise();
+    this.onClickSave.emit();
+  }
 }

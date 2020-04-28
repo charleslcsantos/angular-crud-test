@@ -30,15 +30,17 @@
 }
 
 .user-detail {
-  display: grid;
-  align-items: center;
-  grid-template-columns: 0.3fr 1fr 2fr repeat(3, 1fr);
-  grid-gap: 0.3rem;
   padding: 1rem 1.5rem;
   font-size: 0.8rem;
   color: #888888;
   background: #39373c;
   border-radius: 0 0 10px 10px;
+  .read-only {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 0.2fr 1fr 1fr 0.5fr 0.7fr 0.5fr;
+    grid-gap: 0.3rem;
+  }
   .list__actions {
     display: flex;
     align-items: center;

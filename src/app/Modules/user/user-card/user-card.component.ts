@@ -8,13 +8,26 @@ import { IUser } from "../user.service";
 })
 export class UserCardComponent implements OnInit {
   @Input() user: IUser;
+  userBackup: IUser;
   public canShowDetail = false;
+  public canEditUser = false;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userBackup = { ...this.user };
+  }
 
   openDetail() {
     this.canShowDetail = !this.canShowDetail;
+  }
+
+  edit(user: IUser) {
+    if (user) {
+      this.user = user;
+    } else {
+      this.user = this.userBackup;
+    }
+    this.canEditUser = !this.canEditUser;
   }
 }
