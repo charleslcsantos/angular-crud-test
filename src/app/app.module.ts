@@ -6,6 +6,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HttpRequestInterceptor } from "./http-interceptor/http-request.service";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AlertComponent } from "./shared/alert/alert.component";
 
 const providers: Provider[] = [
   {
@@ -16,7 +17,7 @@ const providers: Provider[] = [
 ];
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, AlertComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

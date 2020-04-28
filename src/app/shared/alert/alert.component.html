@@ -1,0 +1,10 @@
+<div
+  class="alert alert-dismissible fade show shadow"
+  ngClass="alert-{{ alert.type }}"
+  role="alert"
+>
+  <ng-content></ng-content>
+  <button type="button" class="close" (click)="closeAlert()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

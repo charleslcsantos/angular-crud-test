@@ -16,4 +16,10 @@
     >
   </div>
   <router-outlet></router-outlet>
+
+  <div class="alerts">
+    <app-alert *ngFor="let alert of alerts" [alert]="alert">
+      {{ alert.message }}
+    </app-alert>
+  </div>
 </div>
