@@ -5,8 +5,8 @@ import { AlertService } from "src/app/services/Alert/alert.service";
 import { map } from "rxjs/operators";
 
 export enum EnumUserGender {
-  men,
-  women,
+  men = "men",
+  women = "women",
 }
 
 export interface IUser {

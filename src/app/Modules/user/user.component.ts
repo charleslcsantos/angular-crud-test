@@ -59,14 +59,6 @@ export class UserComponent implements OnInit, OnDestroy {
     await this.userService.remove(user, index);
   }
 
-  public compareOptions(option1: EnumUserGender, option2: EnumUserGender) {
-    if (option2) {
-      return option1 === option2;
-    }
-
-    return false;
-  }
-
   ngOnDestroy() {
     this._destroyed$.next();
     this._destroyed$.complete();
