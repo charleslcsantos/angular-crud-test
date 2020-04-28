@@ -1,5 +1,9 @@
 <div class="wrapper">
-  <div class="user-card" (click)="openDetail()">
+  <div
+    class="user-card"
+    [ngClass]="{ 'user-card--opened': canShowDetail }"
+    (click)="openDetail()"
+  >
     <div class="user-card__pic">
       <img src="{{ user.avatar }}" alt="user avatar" />
     </div>
@@ -7,7 +11,7 @@
     <icon-arrow class="btn"></icon-arrow>
   </div>
 
-  <div class="user-detail" *ngIf="canShowDetail">
+  <div class="user-detail" *ngIf="canShowDetail" [@fadeTopToDown]="'state'">
     <div class="read-only" *ngIf="!canEditUser; else userFormTemplate">
       <div class="user-info">{{ user.id }}</div>
       <div class="user-info">{{ user.name }}</div>

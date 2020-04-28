@@ -5,13 +5,13 @@ import { Component, OnInit } from "@angular/core";
   template: `
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="18"
-      height="18"
+      width="22"
+      height="22"
       viewBox="0 0 18 18"
     >
       <g transform="translate(0 0.421)">
         <circle
-          fill="#f03e3e"
+          fill="#a96060"
           cx="9"
           cy="9"
           r="9"

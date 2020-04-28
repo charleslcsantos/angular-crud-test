@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HttpRequestInterceptor } from "./http-interceptor/http-request.service";
-import { IconEditComponent } from "./shared/icons/icon-edit/icon-edit.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 const providers: Provider[] = [
   {
@@ -17,7 +17,12 @@ const providers: Provider[] = [
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+  ],
   providers: providers,
   bootstrap: [AppComponent],
 })

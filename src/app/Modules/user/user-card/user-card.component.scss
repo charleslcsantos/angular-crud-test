@@ -27,6 +27,16 @@
       border: 2px solid #d6d6d6;
     }
   }
+  .btn {
+    transform: rotate(-90deg);
+    transition: all ease 0.2s;
+  }
+
+  &--opened {
+    .btn {
+      transform: rotate(0);
+    }
+  }
 }
 
 .user-detail {

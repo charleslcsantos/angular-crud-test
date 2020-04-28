@@ -1,10 +1,12 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { IUser } from "../user.service";
+import { Animation } from "src/app/shared/animations";
 
 @Component({
   selector: "app-user-card",
   templateUrl: "./user-card.component.html",
   styleUrls: ["./user-card.component.scss"],
+  animations: [Animation.fadeTopToDown],
 })
 export class UserCardComponent implements OnInit {
   @Input() user: IUser;
