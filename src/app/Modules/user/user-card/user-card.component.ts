@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { IUser } from "../user.service";
 import { Animation } from "src/app/shared/animations";
 
@@ -10,6 +10,7 @@ import { Animation } from "src/app/shared/animations";
 })
 export class UserCardComponent implements OnInit {
   @Input() user: IUser;
+  @Output() onClickRemove: EventEmitter<boolean> = new EventEmitter();
   userBackup: IUser;
   public canShowDetail = false;
   public canEditUser = false;
@@ -31,5 +32,9 @@ export class UserCardComponent implements OnInit {
       this.user = this.userBackup;
     }
     this.canEditUser = !this.canEditUser;
+  }
+
+  remove(user: IUser) {
+    this.onClickRemove.emit();
   }
 }

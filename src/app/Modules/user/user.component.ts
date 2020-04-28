@@ -1,12 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { UserService, IUser, EnumUserGender } from "./user.service";
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
 
 @Component({
   selector: "app-user",
   templateUrl: "./user.component.html",
   styleUrls: ["./user.component.scss"],
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
+  _destroyed$ = new Subject();
   public users: IUser[] = null;
   public user: IUser = {
     avatar: "",
@@ -21,10 +24,19 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.getUsers();
+
+    this.userService.users$
+      .pipe(takeUntil(this._destroyed$))
+      .subscribe((updatedUsers) => {
+        this.users = updatedUsers;
+      });
   }
 
   getUsers() {
-    this.userService.getAll().subscribe((users) => (this.users = users));
+    this.userService
+      .getAll()
+      .pipe(takeUntil(this._destroyed$))
+      .subscribe((users) => (this.users = users));
   }
 
   async save(user?: IUser) {
@@ -32,19 +44,19 @@ export class UserComponent implements OnInit {
       user = this.user;
     }
 
-    this.user = await this.userService.save(user).toPromise();
-
     this.users.push(user);
+    this.user = {
+      avatar: "",
+      email: "",
+      name: "",
+      phone: "",
+      username: "",
+      gender: EnumUserGender.men,
+    };
   }
 
-  edit(user: IUser, index: number) {}
-
-  remove(user: IUser, index: number) {
-    this.userService.remove(user).subscribe();
-
-    if (index) {
-      this.users.splice(index, 1);
-    }
+  async remove(user: IUser, index: number) {
+    await this.userService.remove(user, index);
   }
 
   public compareOptions(option1: EnumUserGender, option2: EnumUserGender) {
@@ -53,5 +65,10 @@ export class UserComponent implements OnInit {
     }
 
     return false;
+  }
+
+  ngOnDestroy() {
+    this._destroyed$.next();
+    this._destroyed$.complete();
   }
 }

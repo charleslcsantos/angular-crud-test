@@ -1,10 +1,12 @@
-import { Injectable } from '@angular/core';
-import { HttpService } from 'src/app/services/HttpService/http.service';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { HttpService } from "src/app/services/HttpService/http.service";
+import { Observable, Subject } from "rxjs";
+import { AlertService } from "src/app/services/Alert/alert.service";
+import { map } from "rxjs/operators";
 
 export enum EnumUserGender {
   men,
-  women
+  women,
 }
 
 export interface IUser {
@@ -18,37 +20,69 @@ export interface IUser {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class UserService {
-  endpoint = 'users';
+  endpoint = "users";
+  users: IUser[] = [];
+  users$: Subject<IUser[]> = new Subject();
 
-  constructor(private httpService: HttpService) { }
+  constructor(
+    private httpService: HttpService,
+    private alertService: AlertService
+  ) {}
 
   getAll(): Observable<IUser[]> {
-    return this.httpService.get(this.endpoint);
+    return this.httpService
+      .get(this.endpoint)
+      .pipe(map((users: IUser[]) => (this.users = users)));
   }
 
-  save(user: IUser): Observable<IUser> {
+  async save(user: IUser): Promise<IUser> {
+    let request;
+
     if (user.id) {
-      return this.httpService.put(`${this.endpoint}/${user.id}`, user);
+      request = await this.httpService
+        .put(`${this.endpoint}/${user.id}`, user)
+        .toPromise();
+      this.alertService.alert(`O usuário ${user.name} foi alterado`, "success");
     } else {
-      user.avatar = this.generateAvatar(user.gender);
+      if (user.gender) {
+        user.avatar = await this.generateAvatar(user.gender);
 
-      return this.httpService.post(this.endpoint, user);
+        request = await this.httpService.post(this.endpoint, user).toPromise();
+        this.alertService.alert(`O usuário ${user.name} foi criado`, "success");
+      } else {
+        this.alertService.alert(`Você precisa selecionar um gênero`);
+        throw new Error("Genero nao selecionado");
+      }
     }
+
+    return request;
   }
 
-  remove(user): Observable<null> {
-    return this.httpService.delete(`${this.endpoint}/${user.id}`);
+  async remove(user: IUser, index: number): Promise<any> {
+    let request;
+    request = await this.httpService
+      .delete(`${this.endpoint}/${user.id}`)
+      .toPromise();
+
+    this.alertService.alert(`O usuário ${user.name} foi deletado`, "success");
+
+    this.users.splice(index, 1);
+    this.users$.next(this.users);
+
+    return request;
   }
 
-  generateAvatar(gender: EnumUserGender) {
-    const avatarUrl = 'https://randomuser.me/api/portraits';
+  generateAvatar(gender: EnumUserGender): Promise<any> {
+    return new Promise((resolve) => {
+      const avatarUrl = "https://randomuser.me/api/portraits";
 
-    // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-    const randomNumber = Math.floor(Math.random() * Math.floor(100));
+      // Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+      const randomNumber = Math.floor(Math.random() * Math.floor(100));
 
-    return `${avatarUrl}/${gender}/${randomNumber}.jpg`;
+      resolve(`${avatarUrl}/${gender}/${randomNumber}.jpg`);
+    });
   }
 }

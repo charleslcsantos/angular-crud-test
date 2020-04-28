@@ -29,12 +29,16 @@ export class UserFormComponent implements OnInit {
     }
   }
 
-  async save(user?: IUser) {
+  save(user?: IUser) {
     if (!user) {
       user = this.user;
     }
 
-    this.user = await this.userService.save(user).toPromise();
-    this.onClickSave.emit();
+    this.userService
+      .save(user)
+      .then(() => {
+        this.onClickSave.emit();
+      })
+      .catch(() => {});
   }
 }
