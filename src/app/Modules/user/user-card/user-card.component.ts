@@ -35,6 +35,8 @@ export class UserCardComponent implements OnInit {
   }
 
   remove(user: IUser) {
-    this.onClickRemove.emit();
+    if (confirm("Tem certeza que deseja apagar o registro?")) {
+      this.onClickRemove.emit();
+    }
   }
 }
