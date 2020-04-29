@@ -8,7 +8,7 @@ import { IUser, EnumUserGender, UserService } from "../user.service";
 })
 export class UserFormComponent implements OnInit {
   @Output() onClickCancel?: EventEmitter<boolean> = new EventEmitter();
-  @Output() onClickSave?: EventEmitter<boolean> = new EventEmitter();
+  @Output() onClickSave?: EventEmitter<IUser> = new EventEmitter();
 
   @Input() user: IUser = {
     avatar: "",
@@ -37,7 +37,7 @@ export class UserFormComponent implements OnInit {
     this.userService
       .save(user)
       .then(() => {
-        this.onClickSave.emit();
+        this.onClickSave.emit(user);
       })
       .catch(() => {});
   }

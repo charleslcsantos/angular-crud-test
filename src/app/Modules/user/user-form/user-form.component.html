@@ -17,16 +17,16 @@
   <input
     type="text"
     class="form-control form-control-sm"
-    [(ngModel)]="user.phone"
-    name="Telefone"
-    placeholder="Telefone"
+    [(ngModel)]="user.username"
+    name="Username"
+    placeholder="Username"
   />
   <input
     type="text"
     class="form-control form-control-sm"
-    [(ngModel)]="user.username"
-    name="Username"
-    placeholder="Username"
+    [(ngModel)]="user.phone"
+    name="Telefone"
+    placeholder="Telefone"
   />
   <select
     *ngIf="!user.id"
@@ -35,7 +35,7 @@
     [(ngModel)]="user.gender"
   >
     <option value="men">Masculino</option>
-    <option value="woman">Feminino</option>
+    <option value="women">Feminino</option>
   </select>
   <button
     class="btn btn-sm btn-outline-success"
