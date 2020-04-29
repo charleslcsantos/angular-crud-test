@@ -84,7 +84,10 @@
         font-weight: 800;
         color: #5d5d5d;
         @include min-desktop-size {
-          content: none;
+          display: block;
+          font-size: 0.55rem;
+          font-weight: 400;
+          letter-spacing: 0.02rem;
         }
       }
     }
