@@ -1,16 +1,28 @@
-<div class="new-user">
-  <h2>Criar novos usuários</h2>
-  <app-user-form (onClickSave)="save(user)" [user]="user"></app-user-form>
+<div *ngIf="!isServerOffline; else templateServerOffline">
+  <div class="new-user">
+    <h2>Criar novos usuários</h2>
+    <app-user-form (onClickSave)="save(user)" [user]="user"></app-user-form>
+  </div>
+
+  <div class="list user-list" *ngIf="users; else templateLoadingUsers">
+    <app-user-card
+      *ngFor="let user of users; let index = index"
+      [user]="user"
+      (onClickRemove)="remove(user, index)"
+    ></app-user-card>
+  </div>
+
+  <ng-template #templateLoadingUsers>
+    Carregando usuários...
+  </ng-template>
 </div>
 
-<div class="list user-list" *ngIf="users; else templateLoadingUsers">
-  <app-user-card
-    *ngFor="let user of users; let index = index"
-    [user]="user"
-    (onClickRemove)="remove(user, index)"
-  ></app-user-card>
-</div>
-
-<ng-template #templateLoadingUsers>
-  Carregando usuários...
+<ng-template #templateServerOffline>
+  <h2>
+    Não foi possível se comunicar com o servidor. Tente rodar o servidor para
+    funcionar o app.
+  </h2>
+  <button class="btn btn-outline-success" (click)="tryAgain()">
+    Tentar novamente
+  </button>
 </ng-template>

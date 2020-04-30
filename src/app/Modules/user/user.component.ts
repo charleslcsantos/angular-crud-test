@@ -10,6 +10,7 @@ import { takeUntil } from "rxjs/operators";
 })
 export class UserComponent implements OnInit, OnDestroy {
   _destroyed$ = new Subject();
+  public isServerOffline = false;
   public users: IUser[] = null;
   public user: IUser = {
     avatar: "",
@@ -32,11 +33,21 @@ export class UserComponent implements OnInit, OnDestroy {
       });
   }
 
+  tryAgain() {
+    this.isServerOffline = false;
+    this.getUsers();
+  }
+
   getUsers() {
     this.userService
       .getAll()
       .pipe(takeUntil(this._destroyed$))
-      .subscribe((users) => (this.users = users));
+      .subscribe(
+        (users) => (this.users = users),
+        (e) => {
+          this.isServerOffline = true;
+        }
+      );
   }
 
   async save(user?: IUser) {
