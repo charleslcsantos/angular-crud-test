@@ -1,5 +1,8 @@
 # I systems Crud Test
 
+Este projeto foi criado utilizando o framework Angular
+Nele você poderá visualizar, cadastrar, editar e remover usuários
+
 ## Installing / Getting started
 
 Para rodar o projeto basta clonar ele, instalar as dependencias
